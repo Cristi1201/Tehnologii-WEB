@@ -1,0 +1,167 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+*{
+  box-sizing: border-box;
+}
+.box{
+  max-width: 1660px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+
+.line_decoration{
+  margin: 0 auto;
+  display: block;
+}
+
+.link_poveste_div{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link_poveste{
+  width: 330px;
+  display: block;
+  border: black;
+  border-width: 1px;
+  border-style: dotted;
+  color: darkred;
+  font-size: 20px;
+  padding: 8px;
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+}
+
+.vizionare_poveste{
+  display: flex;
+  flex-direction: column;
+}
+.vizionare_poveste p{
+  color: darkviolet;
+  font-size: 26px;
+}
+
+.videoclip{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 410px;
+  height: 215px;
+}
+
+.poveste{
+  background-color:#80d4ff;
+  margin-right: 300px;
+  margin-left: 300px;
+  margin-bottom: -16px;
+  padding: 20px;
+}
+
+
+.scrolldown{
+  width: 50px;
+  position: fixed;
+  top: 90%;
+  left: 90%;
+}
+
+.div_img1{
+  display: flex;
+}
+
+.img1 {
+  height: 290px; 
+  width: 290px;
+  border: 5px solid blueviolet;
+  margin-right: 10px;
+  margin-left: 10px;
+  opacity: 0.5;
+  transition: 1s;
+}
+.img1:hover {
+  opacity: 1.0;
+}
+
+.img2 {
+  height: 300px;
+  width:  300px;
+  border: 5px solid blueviolet;
+  margin-right: 10px;
+  margin-left: 10px;
+  opacity: 0.5;
+  transition: 1s;
+}
+.img2:hover {
+  opacity: 1.0;
+}
+        
+.img3 {
+  height: 190px;
+  width: 400;
+  border: 5px solid blueviolet;
+  margin-right: 10px;
+  margin-left: 10px;
+  opacity: 0.5;
+  transition: 1s;
+}    
+.img3:hover {
+  opacity: 1.0;
+}
+.sfarsit{
+  text-align: center;
+  font-size: 24px;
+  font-family: courier;
+}
+.tabele{
+   font-family: Times New Roman; 
+   font-style: italic; 
+   text-align: right;
+}
+
+@media screen and (max-width: 1330px){
+  .poveste{
+    margin: 0 10%;
+  }
+  hr{
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 920px){
+  .line_decoration{
+    width: 80%;
+  }
+  .link_poveste{
+    width: 40%;
+    display: block;
+    font-size: 10px;
+  }
+  .videoclip{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 50%;
+    height: 100%;
+  }
+  .div_img1{
+    flex-direction: column;
+    align-items: center;
+  }
+  .img1{
+    width: 40%;
+    height: auto;
+  }
+  .img2{
+    width: 50%;
+    height: auto;
+  }
+  .img3{
+    width: 70%;
+    height: auto;
+  }
+}
+
+
