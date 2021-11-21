@@ -1,0 +1,68 @@
+body {
+  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+  color: #404040;
+  background: #0ca3d2;
+}
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+
+.loginphp {
+  position: relative;
+  margin: auto;
+  padding: 20px 20px 20px;
+  width: 310px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+.loginphp h1 {
+  margin: -20px -20px 21px;
+  line-height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+  background: #f3f3f3;
+  border-bottom: 1px solid #cfcfcf;
+  border-radius: 3px 3px 0 0;
+}
+
+.loginphp p {
+  margin: 20px 0 0;
+}
+
+
+.data {
+  background-color: white;
+}
+
+.pagPrinc {
+  width: 87px;
+  height: 17px;
+  font-size: 14px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #521881;
+  text-shadow: 0 1px #e3f1f1;
+  background: #cde5ef;
+  border: 1px solid;
+  border-color: #9eb9c2;
+  border-radius: 16px;
+  background-image: linear-gradient(to bottom, #edf5f8, #cde5ef);
+  text-decoration: underline;
+}
+
+.error {
+  color: red;
+  margin-left: 5px;
+}
+label.error {
+  display: inline;
+}
+
