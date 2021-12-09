@@ -39,10 +39,10 @@
                     echo "Nume: ".$name;
                     echo "<br>";
                     $surname = ($_POST["surname"]);
-                    if (strlen($name) == 0) {
-                        $name = "Introdceți prenumele";
+                    if (strlen($surname) == 0) {
+                        $surname = "Introdceți prenumele";
                     }
-                    echo "Prenume: ".$name;
+                    echo "Prenume: ".$surname;
                     echo "<br>";
                     $email = ($_POST["email"]);
                     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

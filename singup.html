@@ -23,39 +23,23 @@
 </head>
 <body>
 
-<!-- <div>
-	<?php
-		if(isset($_POST['create'])){
-			$name = $_POST['name'];
-			$surname = $_POST['surname'];
-			$email = $_POST['email'];
-			$gender = $_POST['gender'];
-			$age = $_POST['age'];
-			$password = $_POST['password'];
-
-			echo $name " " $surname
-
-		}
-</div> -->
-
-
 	<div class="bg">
 		<div class="login">
 			<h1>Înregistrează-te</h1>
-		<form name="formValidation" id="formValidation" action="php/singupphp.php" method="POST">
+		<form name="formValidation" id="formValidation" method="POST">
 			
-			<input type="text" name="name" placeholder="Nume">
+			<input type="text" name="name" id="name" placeholder="Nume">
 			
-			<input type="text" name="surname" placeholder="Prenume">
+			<input type="text" name="surname" id="surname" placeholder="Prenume">
 			
-			<input type="email" name="email" placeholder="Email" required>
+			<input type="email" name="email" id="email" placeholder="Email" required>
 			
 			<p class="choice">Alege genul</p>
 			<label>  
-            <input type="radio" id="gender_male" value="m" name="gender" checked="true" />Masculin  
+            <input type="radio" class="gender" value="m" name="gender" checked="true" />Masculin  
         </label>   
-        <label>  
-            <input type="radio" id="gender_female" value="f" name="gender"/>Feminin
+        <label>
+            <input type="radio" class="gender" value="f" name="gender"/>Feminin
         </label>
         <font id="radio_error"></font>
 
@@ -84,17 +68,15 @@
 			  <option value="20">20</option>
 			</select>
 
-			<p><input type="password" name="password" placeholder="Parola" id="password"></p>
-			<p><input type="password" name="password2" placeholder="Parola repetată"></p>
+			<p><input type="password" name="password" id="password" placeholder="Parola" id="password"></p>
+			<p><input type="password" name="password2" id="password2" placeholder="Parola repetată"></p>
 			
 		<p align="right">
-			<input type="submit" value="Submit"  class="choice" style="cursor: pointer; padding-bottom: 20px;"></p>
+			<input type="submit" value="Submit" id="submitF" name="submitF" class="choice" style="cursor: pointer; padding-bottom: 20px;"></p>
 			
 		</form>
 	</div>
 </div>
-	
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
@@ -103,6 +85,7 @@
 
 <script type="text/javascript" src="js/valid.js"></script>
 
+<!-- <script src="js/ajaxSingUp.js"></script> -->
 </body>
 </html>
 

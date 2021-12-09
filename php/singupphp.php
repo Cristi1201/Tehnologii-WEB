@@ -1,89 +1,139 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
 
-    <link rel="stylesheet" type="text/css" href="../css/mainphp.css">
-    <style>
-        .bg {
-            background-image: url("../img/tree.jpg");
-
-            height: 100%; 
-
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
+<?php
+    function verifyName($name) {
+        if (strlen($name) == 0) {
+            return false;
         }
-    </style>
-</head>
+        return true;
+    }
+
+    function verifySurname($surname) {
+        if (strlen($surname) == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    function verifyEmail($email) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        return true;
+    }
+
+    function verifyPassword($pass) {
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@', $pass);
+        if (!$uppercase || !$lowercase || !$number || strlen($pass) < 8) {
+            return false;
+        }
+        return true;
+    }
+
+    function verifyEqualityOfPasswords($pass1, $pass2) {
+        if ($pass1 != $pass2) {
+            return false;
+        }
+        return true;
+    }
+?>
+
+<?php
+    if (isset($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['gender'], $_POST['age'], $_POST['password'], $_POST['password2'])) {
+
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "tw_bd";
+
+        // crearea conexiunii
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        // verificare conexiune
+        if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+        }
+
+        $name = mysqli_real_escape_string($conn, $_POST['name']);
+        $surname = mysqli_real_escape_string($conn, $_POST['surname']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+        $age = mysqli_real_escape_string($conn, $_POST['age']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+        $password2 = mysqli_real_escape_string($conn, $_POST['password2']);
+
+        $allDataValidate = true;
+
+        if (!verifyName($name)) {
+            $allDataValidate = false;
+        }
+        
+        if (!verifySurname($surname)) {
+            $allDataValidate = false;
+        }
+        
+        if (!verifyEmail($email)) {
+            $allDataValidate = false;
+        }
+        
+        if ($gender == "m") {
+            $gender = "masculin";
+        }
+        else{
+            $gender = "feminin";
+        }
+
+        if (!verifyPassword($password) || !verifyPassword($password2)) {
+            $allDataValidate = false;
+        }
+        elseif (!verifyEqualityOfPasswords($password, $password2)) {
+            $allDataValidate = false;
+        }
+
+        if ($allDataValidate) {
+            $verifyEmailExist = "SELECT email FROM users WHERE email='$email'";
+
+            $resultVerifyEmailExist = $conn->query($verifyEmailExist);
+
+            if ($resultVerifyEmailExist->num_rows == 0) {
+                $password = md5($password);
+                $sql = "INSERT INTO users (prenume, nume, email, gen, varsta, parola) VALUES ('$name', '$surname', '$email', '$gender', '$age', '$password'";
+
+                if (mysqli_query($conn, $sql)) {
+                    echo json_encode(array("statusCode" => 200));
+                }
+                else {
+                    echo json_encode(array("statusCode" => 201));
+                    // die();
+                }
+            }
+            else {
+                echo json_encode(array("statusCode" => 202));
+                // die();
+            }
+        }
+    }
+?>
 
 
 
-<body>
 
-    <div class="bg">
-        <div class="loginphp">
-          <h1>Bine ați venit !</h1>
-            <p class="data">
-                <?php 
-                    $name = ($_POST["name"]);
-                    if (strlen($name) == 0) {
-                        $name = "Introdceți numele";
-                    }
-                    echo "Nume: ".$name;
-                    echo "<br>";
-                    $surname = ($_POST["surname"]);
-                    if (strlen($name) == 0) {
-                        $name = "Introdceți prenumele";
-                    }
-                    echo "Prenume: ".$name;
-                    echo "<br>";
-                    $email = ($_POST["email"]);
-                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        $email = "Email-ul este incorect";
-                    }
-                    echo "Email: ".$email;
-                    echo "<br>";
 
-                    $gender = ($_POST["gender"]);
-                    if ($gender == "m") {
-                        $gender = "masculin";
-                    }
-                    else{
-                        $gender = "feminin";
-                    }
-                    echo "Genul: ".$gender;
-                    echo  "<br>";
 
-                    $age = ($_POST["age"]);
-                    echo "Varsta: ".$age;
-                    echo  "<br>";
 
-                    $pass1 = ($_POST["password"]);
-                    $pass2 = ($_POST["password2"]);
-                    if (strlen($pass1) < 8 || strlen($pass2) < 8) {
-                        $pass1 = "Parola nu corespunde cerințelor";
-                    }
-                    else {
-                        $pass1 = md5($pass1);
-                        $pass2 = md5($pass2);
-                        if ($pass1 == $pass2) {
-                        }
-                        else {
-                            $pass1 = "Parolele nu coincid";
-                        }
-                    }
-                    echo "Parola: ".$pass1;     
-                ?>
-            </p>
-            <p align="right"><a href="../ion_creanga.html" class="pagPrinc">Pagina principala</a></p>
-        </div>
-    </div>
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

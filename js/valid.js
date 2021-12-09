@@ -1,7 +1,6 @@
 
 $(document).ready(function () {
 
-    //### CONTACT FORM VALIDATE ###
     $("#formValidation").validate({
 
         rules: {
@@ -25,7 +24,7 @@ $(document).ready(function () {
           password2: {
             minlength: 8,
             equalTo: "#password"
-          }
+          },
         },
         messages: {
           name: {
@@ -47,139 +46,45 @@ $(document).ready(function () {
           },
           password2: {
            equalTo: "Parolele trebuie să fie identice"
-          }
-
+          },
         },
 
         submitHandler: function(form) {
+          var name = $('#name').val();
+          var surname = $('#surname').val();
+          var email = $('#email').val();
+          var gender = $('.gender').val();
+          var age = $('#age').val();
+          var password = $('#password').val();
+          var password2 = $('#password2').val();
+          $.ajax({
+            type: 'POST',
+            url: 'php/singupphp.php',
+            dataType: 'json',
+            data: {
+              name : name,
+              surname : surname,
+              email : email,
+              gender : gender,
+              age : age,
+              password : password,
+              password2 : password2,
+            },
+            success: function(resp){
+
+              if (resp.statusCode == 200) {
+                alert("SUCCES");
+                // window.locatix on.href = "login.html";
+              }
+              else if(resp.statusCode == 201) {
+                alert("EROARE DE INREGISTRARE");
+              }
+              else if(resp.statusCode == 202) {
+                alert("ALTA EROARE");
+              }
+            }
+          })
           form.submit();
         }
     });
-   
 });
-
-
-
-
-
-
-
-
-
-
-
-// $(document).ready(function() {  
-         // $("#mysbutton").click(function() {  
-             
-         // });
-//        }); 
-
-
-
-
-
-
-
-
-
-// $(document).ready(function () {
-
-//     //### CONTACT FORM VALIDATE ###
-//     $("#form").validate({
-//         rules: {
-//           nume: {
-//             required: true
-//           },
-//           prenume: {
-//             required: true
-//           }
-//           email: {
-//             required: true,
-//             email: true
-//           }
-//         },
-//         messages: {
-//           nume: {
-//             required: "Introduce-ți numele",
-//           },
-//           prenume: {
-//             required: "Introduce-ți prenumele",
-//           },
-//           email: {
-//             required: "Trebu email",
-//             email: "Introdu corect !!"
-//           }
-//         },
-//         submitHandler: function(form) {
-//           form.submit();
-//         }
-//     });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// <script src="jquery.js" type="text/javascript">
-
-    // $(function() {
-    //  $("#singup").click(function() {
-    //  var email = $(#email).val();
-    //  var password = $(#password).val();
-
-    //  if (email.indexOf("@") < 0 || email.indexOf(".") < 0) {
-    //      alert("Email greșit");
-    //      return;
-    //  }
-
-    //  if (password.length < 8) {
-    //      alert("Parola trebuie să conțină minim 9 caractere")
-    //      return;
-    //  }
-    //  document.write("Datele s-au înregistrat cu succes !")
-    //  });
-    // });
-
-
-    // $(document).ready(function() {
-    //  $('#form').submit(function(e) {
-    //      e.preventDefault();
-            
-    //      var pswd = $('#password').val();
-
-    //      $(".error").remove(); 
-
-    //      if (password.length < 8) {
-    //              $('#password').after('<span class="error">Password must be at least 8 characters long</span>');
- //         }
-    //  });
-    // });
-
-//     $(document).ready(function () {
-//         $('#form').validate({
-//             rules: {
-//                 password: {
-//                     required: true,
-//                     minlength: 8
-//                 }
-//             },
-//             sumbitHandler: function(form) {
-//                 alert('valid form submitted');
-//                 return false;
-//             }
-//         });
-//     });
-
-
-// </script>
-
-
