@@ -39,16 +39,9 @@
                 $password = md5($password);
 
                 if (verifyEqualityOfPasswords($password, $result["parola"])) {
-                    // print_r("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                     echo json_encode(array("statusCode" => 200));
                     die();
                 }
-                // else {
-                //     print_r("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                // }
-                // else {
-                //     echo json_encode(array("statusCode" => 201));
-                // }
             }
         }
     }
