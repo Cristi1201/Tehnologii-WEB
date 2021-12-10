@@ -38,6 +38,7 @@ $(document).ready(function () {
             },
             success: function(resp){
               if (resp.statusCode == 200) {
+                alert("LOGARE CU SUCCES");
                 window.location.href = "ion_creanga.html";
               }
               else if (resp.statusCode == 201) {
@@ -45,7 +46,7 @@ $(document).ready(function () {
               }
             }
           })
-          form.submit();
+          // form.submit();
         }
     });
 });

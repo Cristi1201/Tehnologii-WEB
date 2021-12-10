@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
     $("#formValidation").validate({
@@ -73,18 +72,17 @@ $(document).ready(function () {
             success: function(resp){
 
               if (resp.statusCode == 200) {
-                alert("SUCCES");
-                // window.locatix on.href = "login.html";
+                alert("INREGISTRARE CU SUCCES");
+                window.location.href = "login.html";
               }
               else if(resp.statusCode == 201) {
-                alert("EROARE DE INREGISTRARE");
+                alert("VERIFICATI DATELE");
               }
               else if(resp.statusCode == 202) {
-                alert("ALTA EROARE");
+                alert("EROARE DE INREGISTRARE");
               }
             }
           })
-          form.submit();
         }
     });
 });

@@ -1,4 +1,3 @@
-
 <?php
     function verifyEmail($email) {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -16,62 +15,45 @@
 ?>
 
 <?php
+    include 'connection.php';
+
     if (isset($_POST['email'], $_POST['password'])) {
         
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "tw_bd";
+        $conn = conexiune("localhost", "root", "", "tw_bd");
 
-        // crearea conexiunii
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-        // verificare conexiune
         if (!$conn) {
-          die("Connection failed: " . mysqli_connect_error());
+          die("Conexiunea nu a reusit: " . mysqli_connect_error());
         }
 
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         
-        
         if (verifyEmail($email)) {
 
-            $selectEmail = "SELECT email FROM users WHERE email='$email' LIMIT 1";
-            $resultSelectEmail = $conn->query($selectEmail);
+            $selectCredentials = "SELECT email, parola FROM users WHERE email='$email' LIMIT 1";
+            $resultSelectCredentials = $conn->query($selectCredentials);
             
-            if ($resultSelectEmail !== false && $resultSelectEmail->num_rows > 0) {
-                
-                $selectPassword = "SELECT parola FROM users WHERE email='$email' LIMIT 1";
-                $resultSelectPassword = $conn->query($selectPassword);
-                
-                if ($resultSelectPassword !== false && $resultSelectPassword->num_rows > 0) {
-                    
-                    $password = md5($password);
-                    
-                    $row = $resultSelectPassword->fetch_assoc();
-                    
-                    if (verifyEqualityOfPasswords($password, $row["parola"])) {
-                        echo json_encode(array("statusCode" => 200));
-                    }
-                    else {
-                        echo json_encode(array("statusCode" => 201));
-                    }
+            if ($resultSelectCredentials !== false && $resultSelectCredentials->num_rows > 0) {
+
+                $result = $resultSelectCredentials->fetch_assoc();
+                $password = md5($password);
+
+                if (verifyEqualityOfPasswords($password, $result["parola"])) {
+                    // print_r("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                    echo json_encode(array("statusCode" => 200));
+                    die();
                 }
-                else {
-                    echo json_encode(array("statusCode" => 201));
-                }
-            }
-            else {
-                echo json_encode(array("statusCode" => 201));
+                // else {
+                //     print_r("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                // }
+                // else {
+                //     echo json_encode(array("statusCode" => 201));
+                // }
             }
         }
-        else {
-            echo json_encode(array("statusCode" => 201));
-        }
     }
-    else {
-        echo json_encode(array("statusCode" => 201));
-    }
+    echo json_encode(array("statusCode" => 201));
+    die();
 ?>
 
 
